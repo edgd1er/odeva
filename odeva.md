@@ -10,6 +10,17 @@
 
 
 
+# Livrables
+
+ * Un accès au projet Platine sur Gitlab
+ * Document court (1 page) :
+   * Répartition des tâches
+   * Statégie sur la CI / CD
+   * Les problèmes rencontrés
+   * Les solutions apportées
+
+
+
 # Projet
 
 L'art de travailler ensemble.
@@ -68,16 +79,17 @@ Une projet se reussit en agissant sur les faits et en travaillant en vérité av
 
 # Intégration continue
  * Jenkins, Teamcity, Bamboo, Travis, ...
- * Compilation automatique
+ * Compilation automatique et immutable
  * Test unitaires
  * Test d'intégration
  * Génération artefacts
 
 
 # Déploiement auto
- * Cela devient une réalité
+ * C'est une réalité
  * Déploiement simplifié.
- * Github, Facebook, Google
+ * Github, Facebook, Google, Amazon
+ * Même des PME de 12 personnes
 
 
 
@@ -102,7 +114,7 @@ Une projet se reussit en agissant sur les faits et en travaillant en vérité av
  * Git: 2005, Linus Torvalds
 
 
-# 2016
+# 2020
 
 Toutes les sociétés n’utilisent pas encore de SCM !
 
@@ -140,7 +152,7 @@ Toutes les sociétés n’utilisent pas encore de SCM !
  * Phrases à bannir !
 
 
-# Worflow
+# Workflow
 
 ![Trac Workflow](images/TracWorkflow.png)
 
@@ -398,12 +410,46 @@ Gestion manuelle la plupart du temps.
 Nouveau rôle : Intégrateur.
 
 
+# Github simple
+
+ * Une seule personne partage son dépôt
+ * [Ajouter un utilisateur à un dépôt](https://help.github.com/articles/inviting-collaborators-to-a-personal-repository/)
+
+
+# Github Workflow
+
+![Github Workflow](images/GithubWorkflow.png)
+
+
+# Github Workflow - Remote
+
+ * [Ajout des remote](https://help.github.com/articles/configuring-a-remote-for-a-fork/)
+ * [Créer un PR](https://help.github.com/articles/creating-a-pull-request/)
+ * [Contribuer à un projet : fork, clone, PR](https://github.com/firstcontributions/first-contributions)
+
+
+# Gitflow
+
+![image](https://datasift.github.io/gitflow/GitFlowHotfixBranch.png)
+
+
+# Microsoft Flow
+
+![image](https://docs.microsoft.com/en-us/azure/devops/learn/_img/branch-strategy.png)
+
+
+# Your Flow
+
+ * A vous
+ * Peu de mauvaises solutions
+ * Besoin d'expliquer le fonctionnement
+ * Gestion des bugfixes claire
+
+
 
 # Les commandes GIT
 
  [La meilleure source à mon avis](http://ndpsoftware.com/git-cheatsheet.html)
-
-Proxy : [Trac ODEVA](http://forge.fil.univ-lille1.fr/eODEVA/wiki/ReglageProxySCV)
 
 
 
@@ -497,8 +543,15 @@ git push origin master
 cd ../testGitLocal
 echo "Modification B" >> a.txt
 git commit -am "Modification a.txt"
-git pull --rebase
+git pull --rebase origin master
 git push origin master
+```
+
+
+# Tracking des branches
+
+```bash
+git push -u origin mabranche
 ```
 
 
@@ -596,6 +649,13 @@ Excellent moyen d'apprendre !
  * Revision 1024!!
 
 
+# La question Pourquoi ?
+
+ * [Semantic commit messages](https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716)
+ * Prévoir la recherche future
+ * Regarder les commits du noyau Linux
+
+
 # Conflits
 
  * Ne pas se lancer la patate chaude.
@@ -639,6 +699,25 @@ language: java
  * Faire un commit
 
 
+# TP / Recapitulatif
+
+ * Créer le dépôt Github
+ * Ajouter les sources à la racine (pom.xml à la racine)
+ * Activer le dépôt dans Travis
+ * Créer et pousser le `.travis.yml`
+ * Attendre le "vert"
+
+
+# TP / plusieurs version Java
+
+```yaml
+language: java
+jdk:
+  - openjdk8
+  - openjdk9
+```
+
+
 # Un fichier plus complet
 
 ```yaml
@@ -667,9 +746,9 @@ script:
  * https://github.com/seblucas/cops/blob/master/.travis.yml
 
 
-# Exercice
+# TP / Web
 
- * Reprendre un projet passé (Web si possible)
+ * Reprendre un projet passé (Web)
  * Créer un projet Github, l'importer
  * Le lier à Travis
  * utiliser les outils de lint (csslint, jslint, bootlint)
@@ -677,12 +756,33 @@ script:
 
 # Autres outils intégrés
 
- * Selenium / Appium : [Saucelabs](https://saucelabs.com/), [Browserstack](https://www.browserstack.com/), ...
+ * Selenium / Appium : [Saucelabs](https://saucelabs.com/), [Browserstack](https://www.browserstack.com/), [Cypress](https://www.cypress.io/), ...
  * Analyse statique de code : [Codeclimate](https://codeclimate.com), [Scrutinizer](https://scrutinizer-ci.com/), ...
  * Couverture de code : [Coveralls](https://coveralls.io/), la liste précédente
- * Vérification de dépendances : [Versioneye](https://www.versioneye.com/), [David](https://david-dm.org/), [Greenkeeper](https://greenkeeper.io/), ...
+ * Vérification de dépendances : [Versioneye](https://www.versioneye.com/), [David](https://david-dm.org/), [Snyk](https://snyk.io/), ...
  * Documentation : [ReadTheDocs](https://docs.readthedocs.io/en/latest/), [Apiary](https://apiary.io/), ...
  * Déploiement : AWS, Azure, Heroku, Play Store, ...
+
+
+# TP / Intégration SonarQube
+
+ * Créer ou reprendre un dépôt Github avec un projet Java
+ * Suivre la [doc](https://docs.travis-ci.com/user/sonarcloud/) pour intégrer SonarQube
+ * Comparez les résultats entre vous
+
+
+# TP / Exemple sonar-project.properties
+
+```
+sonar.projectKey=XXX
+sonar.projectName=Test
+sonar.projectVersion=1.0-SNAPSHOT
+
+# SQ standard properties
+sonar.sources=src/
+sonar.language=java
+sonar.java.binaries=output/  
+```
 
 
 
@@ -738,6 +838,26 @@ git rebase -i master
 Notion de cherry picking et commit squashing.
 
 
+# TP / Squash
+
+```bash
+git log
+git log --graph --decorate --pretty=oneline --abbrev-commit
+git rebase -i HEAD~[NUMBER OF COMMITS]
+ou
+git rebase -i [SHA]
+```
+
+
+# TP / Squash
+
+```bash
+git rebase -p --onto SHA^ SHA
+
+git log --abbrev-commit master..
+```
+
+
 # TP / Rebase Attention
 
 Ne jamais utiliser le `rebase` sur des commits qui ne sont pas strictement locaux.
@@ -747,7 +867,7 @@ Ne jamais utiliser le `rebase` sur des commits qui ne sont pas strictement locau
 
 ```bash
 nano b.txt # Faire des changements
-git stash save "Sauvegarde des modifications sur b.txt"
+git stash push -m "Sauvegarde des modifications sur b.txt"
 git stash list
 git stash show -p stash@{0}
 git stash pop
@@ -758,7 +878,7 @@ git stash list && git status
 # TP / stash (2/2)
 
 ```bash
-git stash save -u "Sauvegarde des modifications y compris les ajouts"
+git stash push -u -m "Sauvegarde des modifications y compris les ajouts"
 git stash clear # Attention irrémédiable
 git stash branch <branchname> <stashname>
 ```
@@ -767,4 +887,172 @@ git stash branch <branchname> <stashname>
 
 # Adapter son prompt
 
-[Ca se passe ici](http://www.git-attitude.fr/2013/05/22/prompt-git-qui-dechire/)
+A ajouter dans le `.bashrc`
+
+```
+parse_git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+export PS1="\u@\h \[\e[32m\]\w \[\e[91m\]\$(parse_git_branch)\[\e[00m\]$ "
+```
+
+
+
+# Début de projet
+
+ * Créer le dépôt Git
+ * Définir les règles
+ * Créer l'intégration continue (et vérifier les règles)
+ * Créer la livraison continue
+ * Ecrire les tickets (avec priorités)
+ * Valider l'architecture
+ * Commencer le code
+
+
+# 1 mois après
+
+ * Mettre à jour les tickets
+ * Revue de code
+ * Formation interne éventuellement
+ * Remettre à jour les règles
+ * Modifier l'intégration continue
+ * Valider que la livraison continue est fiable
+
+
+# 1 semaine avant fin projet
+
+ * Mettre à jour les tickets
+ * Faire des choix
+ * Tester, Tester, Tester
+ * Valider que la livraison continue est fiable
+
+
+# Après la livraison
+
+ * Faire un bilan / rétrospective
+   * A supprimer
+   * A améliorer
+   * A conserver
+
+
+# Bilan
+
+ * Soyez fainéant
+   * Ne faites que ce qui est nécessaire
+   * Soustraitez le maximum aux machines
+ * Automatisez
+ * Communiquez
+
+
+
+# Bonus // Docker
+
+
+# Installation VM
+
+ * Lancer Virtualbox
+ * Récupérez l'image disque  : [ici](https://github.com/seblucas/odeva/releases/tag/1.0.0)
+ * La dezipper
+ * Créer une VM de type Linux / Ubuntu 64bits
+ * Ne pas créer de nouveau disque mais pointer sur le disque téléchargé
+
+
+# Installlation sur Ubuntu 20.04
+
+```bash
+sudo apt install docker.io
+sudo systemctl enable --now docker
+sudo usermod -aG docker SOMEUSERNAME
+```
+
+
+# Principes
+
+ * Docker == conteneur != machine virtuelle
+ * Moins sécurisé (partage le noyau)
+ * Plus léger 
+
+
+# Registry : Docker hub
+
+ * Source de vos images de base
+ * ubuntu / alpine / etc
+ * `docker run --rm hello-world`
+
+
+# TP / Arriere plan
+
+```bash
+docker run -d -p 8080:80 nginx
+# -d : detached // arrière plan
+# -p : transfert de port
+wget http://localhost:8080 
+```
+
+
+# TP / Rentrer dans un conteneur
+
+```bash
+docker ps -a # liste les conteneurs
+docker exec -it ID_RETOURNÉ_LORS_DU_PS bash
+wget http://localhost:80 # dans le conteneur
+## CTRL + D pour sortir ##
+```
+
+
+# TP / Stopper supprimer
+
+```bash
+docker ps -a # liste les conteneurs
+docker stop ID_RETOURNÉ_LORS_DU_PS
+docker rm ID_RETOURNÉ_LORS_DU_PS
+```
+
+
+# TP / Dockerfile
+
+```
+FROM alpine:3.12
+
+RUN apk --no-cache --update add python3 && \
+    rm -rf /tmp/* /var/tmp/* /var/cache/apk/*
+
+WORKDIR /app
+
+COPY hello.py .
+
+CMD ["python3", "hello.py"]
+```
+
+
+# TP / Dockerfile - hello.py
+
+```
+print("Hello, World!")
+```
+
+
+# TP / Dockerfile - build
+
+```bash
+docker build -t testmaster:latest .
+docker run -it --rm testmaster:latest
+```
+
+
+# TP / Structure en couche / layer
+
+```bash
+echo -e "\nprint(\"Very new world\")" >> hello.py
+docker build . -t testmaster:latest
+# Seules les couches modifiées sont reconstruites
+docker run -it --rm testmaster:latest
+```
+
+
+# Suite
+
+ * docker-compose
+ * push / pull
+ * Lien avec VS Code pour développer dans un conteneur
+ * Kubernetes
